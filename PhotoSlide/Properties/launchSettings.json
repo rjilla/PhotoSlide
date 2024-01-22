@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "PhotoSlide": {
+      "commandName": "Project",
+      "commandLineArgs": "D:\\VSProyectos\\App\\SofOut\\PhotoSlide\\PruebaPhotoSlide\\Maker.svp",
+      "workingDirectory": "D:\\VSProyectos\\App\\SofOut\\PhotoSlide\\PruebaPhotoSlide\\"
+    }
+  }
+}
