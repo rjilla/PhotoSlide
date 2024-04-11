@@ -1,6 +1,6 @@
-using System.Collections.Generic;
+using Microsoft.VisualBasic.Devices;
+using NAudio.Wave;
 using System.ComponentModel;
-using System.Xml.Linq;
 
 namespace PhotoSlideMaker
 {
@@ -24,8 +24,11 @@ namespace PhotoSlideMaker
             txPresetName.Text = ParseSettings.PresetName;
             txTimePerPic.Text = ParseSettings.TimePerPic;
             txWebsite.Text = ParseSettings.Website;
-            if (!string.IsNullOrEmpty(ParseSettings.Avatar))
+            if (string.IsNullOrEmpty(ParseSettings.Avatar))
+                pbAvatar.Image = null;
+            else
                 pbAvatar.Image = new Bitmap(txCarpeta.Text + '\\' + txAvatar.Text);
+
             imagenes.Clear();
             foreach (var item in ParseSettings.PhotoList)
             {
@@ -46,70 +49,96 @@ namespace PhotoSlideMaker
         }
         private void BtBuscaAvatar_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txCarpeta.Text))
+            try
             {
-                MessageBox.Show("Debe elegir la carpeta del preset.");
-                return;
+                if (string.IsNullOrEmpty(txCarpeta.Text))
+                {
+                    MessageBox.Show("Debe elegir la carpeta del preset.");
+                    return;
+                }
+                ofdBuscaArchivo.Multiselect = false;
+                DialogResult result = ofdBuscaArchivo.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    txAvatar.Text = ofdBuscaArchivo.SafeFileName;
+                    string fileDestino = txCarpeta.Text + '\\' + ofdBuscaArchivo.SafeFileName;
+                    if (!File.Exists(fileDestino))
+                        File.Copy(ofdBuscaArchivo.FileName, fileDestino, true);
+                    pbAvatar.Image = new Bitmap(fileDestino);
+                }
             }
-            DialogResult result = ofdBuscaArchivo.ShowDialog();
-            if (result == DialogResult.OK)
+            catch (Exception ex)
             {
-                txAvatar.Text = ofdBuscaArchivo.SafeFileName;
-                string fileDestino = txCarpeta.Text + '\\' + ofdBuscaArchivo.SafeFileName;
-                if (!File.Exists(fileDestino))
-                    File.Copy(ofdBuscaArchivo.FileName, fileDestino, true);
-                pbAvatar.Image = new Bitmap(fileDestino);
+                MessageBox.Show(this.Owner, ex.Message);
+                txAvatar.Text = string.Empty;
             }
         }
         private void BtBuscaAudio_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txCarpeta.Text))
+            try
             {
-                MessageBox.Show("Debe elegir la carpeta del preset.");
-                return;
+                if (string.IsNullOrEmpty(txCarpeta.Text))
+                {
+                    MessageBox.Show(this.Owner, "Debe elegir la carpeta del preset.");
+                    return;
+                }
+                ofdBuscaArchivo.Multiselect = false;
+                DialogResult result = ofdBuscaArchivo.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    txAudio.Text = ofdBuscaArchivo.SafeFileName;
+                    string fileDestino = txCarpeta.Text + '\\' + ofdBuscaArchivo.SafeFileName;
+                    if (!File.Exists(fileDestino))
+                        File.Copy(ofdBuscaArchivo.FileName, fileDestino, true);
+                    AudioFileReader AudioFile;
+                    if (!string.IsNullOrEmpty(txAudio.Text))
+                        AudioFile = new AudioFileReader(fileDestino);
+                }
             }
-            DialogResult result = ofdBuscaArchivo.ShowDialog();
-            if (result == DialogResult.OK)
+            catch (Exception ex)
             {
-                txAudio.Text = ofdBuscaArchivo.SafeFileName;
-                string fileDestino = txCarpeta.Text + '\\' + ofdBuscaArchivo.SafeFileName;
-                if (!File.Exists(fileDestino))
-                    File.Copy(ofdBuscaArchivo.FileName, fileDestino, true);
+                MessageBox.Show(this.Owner, ex.Message);
+                txAvatar.Text = string.Empty;
             }
         }
         private void BtAgregaImagen_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txCarpeta.Text))
             {
-                MessageBox.Show("Debe elegir la carpeta del preset.");
+                MessageBox.Show(this.Owner, "Debe elegir la carpeta del preset.");
                 return;
             }
+            ofdBuscaArchivo.Multiselect = true;
             DialogResult result = ofdBuscaArchivo.ShowDialog();
             if (result == DialogResult.OK)
             {
-                string fileDestino = txCarpeta.Text + '\\' + ofdBuscaArchivo.SafeFileName;
-                if (!File.Exists(fileDestino))
-                    File.Copy(ofdBuscaArchivo.FileName, fileDestino, true);
-                imagenes.Add(ofdBuscaArchivo.SafeFileName);
+                foreach (var item in ofdBuscaArchivo.FileNames)
+                {
+                    string file = Path.GetFileName(item);
+                    string fileDestino = txCarpeta.Text + '\\' + file;
+                    if (!File.Exists(fileDestino))
+                        File.Copy(item, fileDestino, true);
+                    imagenes.Add(file);
+                }
             }
         }
         private void BtGrabar_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txCarpeta.Text))
             {
-                MessageBox.Show("Debe elegir la carpeta del preset.");
+                MessageBox.Show(this.Owner, "Debe elegir la carpeta del preset.");
                 return;
             }
             if (string.IsNullOrEmpty(txSVPFile.Text))
             {
-                MessageBox.Show("Debe definir el nombre del SVP File.");
+                MessageBox.Show(this.Owner, "Debe definir el nombre del SVP File.");
                 return;
             }
             string fileDestino = txCarpeta.Text + '\\' + txSVPFile.Text;
             if (Path.GetExtension(fileDestino.ToLower()) != ".svp")
             {
                 string ver = Path.GetExtension(fileDestino.ToLower());
-                MessageBox.Show("La extensión del SVP File debe ser <.svp>. \r Se ingresó " + ver);
+                MessageBox.Show(this.Owner, "La extensión del SVP File debe ser <.svp>. \r Se ingresó " + ver);
                 return;
             }
 
@@ -129,9 +158,9 @@ namespace PhotoSlideMaker
                 ParseSettings.PhotoList.Add(item);
             }
             if (ParseSettings.GrabaSettings(fileDestino))
-                MessageBox.Show("Se generó con exito el preset.");
+                MessageBox.Show(this.Owner, "Se generó con exito el preset.");
             else
-                MessageBox.Show("ERROR al generar el preset.");
+                MessageBox.Show(this.Owner, "ERROR al generar el preset.");
         }
         private void BtCargaPreset_Click(object sender, EventArgs e)
         {
@@ -146,11 +175,58 @@ namespace PhotoSlideMaker
         }
         private void BtBorraImagen_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Función en desarrollo");
+            try
+            {
+                if (string.IsNullOrEmpty(txCarpeta.Text))
+                {
+                    MessageBox.Show("Debe elegir la carpeta del preset.");
+                    return;
+                }
+                int inx = lbxPhotoList.SelectedIndex;
+                string? item = lbxPhotoList.SelectedItem.ToString();
+                if (inx >= 0)
+                {
+                    DialogResult result = MessageBox.Show(this.Owner, "Desea eliminar " + item + " de la lista ?", "Eliminar Item", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                        imagenes.RemoveAt(inx);
+                }
+                else
+                    MessageBox.Show(this.Owner, "Debe seleccionar el item que desea borrar. ");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this.Owner, ex.Message);
+            }
         }
         private void BtLimpiarPantalla_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Función en desarrollo");
+            ParseSettings.ClearSetting();
+            CargaPantalla();
+        }
+        private void CkLoopPhotoCycle_CheckedChanged(object sender, EventArgs e)
+        {
+            ParseSettings.LoopPhotoCycle = ckLoopPhotoCycle.Checked;
+        }
+        private void CkInitiateAudioEachCycle_CheckedChanged(object sender, EventArgs e)
+        {
+            ParseSettings.InitiateAudioEachCycle = ckInitiateAudioEachCycle.Checked;
+        }
+        
+        bool exitByRunPreset = false;
+        private void BtRunPreset_Click(object sender, EventArgs e)
+        {
+            FrmShow preset = new();
+            preset.CargaDatos(txCarpeta.Text);
+            preset.ShowDialog();
+            preset.BringToFront();
+            exitByRunPreset = true;
+            //this.Close();
+        }
+
+        private void FrmMaker_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!exitByRunPreset)
+                Application.Exit();
         }
     }
 }

@@ -10,7 +10,6 @@ namespace PhotoSlideMaker
         { 
         }
 
-        internal static AudioFileReader? AudioFile;
         internal static bool InitiateAudioEachCycle = false;
         internal static bool LoopPhotoCycle = false; 
         
@@ -50,6 +49,7 @@ namespace PhotoSlideMaker
 
         internal static bool CargaSetting(string pArchivo)
         {
+            ClearSetting();
             ArchivoSetting = pArchivo;
             StringBuilder strDescripcion = new();
             StreamReader reader = new(ArchivoSetting);

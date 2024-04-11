@@ -69,6 +69,8 @@
             btBuscaAudio = new Button();
             btCargaPreset = new Button();
             btLimpiarPantalla = new Button();
+            lbSinUso1 = new Label();
+            lbSinEfecto = new Label();
             gbRunPreset.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbAvatar).BeginInit();
             SuspendLayout();
@@ -95,6 +97,7 @@
             ckInitiateAudioEachCycle.TabIndex = 28;
             ckInitiateAudioEachCycle.Text = "Initiate Audio Each Cycle";
             ckInitiateAudioEachCycle.UseVisualStyleBackColor = true;
+            ckInitiateAudioEachCycle.CheckedChanged += CkInitiateAudioEachCycle_CheckedChanged;
             // 
             // ckLoopPhotoCycle
             // 
@@ -105,15 +108,17 @@
             ckLoopPhotoCycle.TabIndex = 29;
             ckLoopPhotoCycle.Text = "Loop Photo Cycle";
             ckLoopPhotoCycle.UseVisualStyleBackColor = true;
+            ckLoopPhotoCycle.CheckedChanged += CkLoopPhotoCycle_CheckedChanged;
             // 
             // btRunPreset
             // 
-            btRunPreset.Location = new Point(193, 37);
+            btRunPreset.Location = new Point(178, 33);
             btRunPreset.Name = "btRunPreset";
-            btRunPreset.Size = new Size(75, 23);
+            btRunPreset.Size = new Size(75, 28);
             btRunPreset.TabIndex = 1;
             btRunPreset.Text = "&Run";
             btRunPreset.UseVisualStyleBackColor = true;
+            btRunPreset.Click += BtRunPreset_Click;
             // 
             // lbPhotoList
             // 
@@ -446,11 +451,33 @@
             btLimpiarPantalla.UseVisualStyleBackColor = true;
             btLimpiarPantalla.Click += BtLimpiarPantalla_Click;
             // 
+            // lbSinUso1
+            // 
+            lbSinUso1.AutoSize = true;
+            lbSinUso1.ForeColor = Color.Maroon;
+            lbSinUso1.Location = new Point(174, 278);
+            lbSinUso1.Name = "lbSinUso1";
+            lbSinUso1.Size = new Size(67, 15);
+            lbSinUso1.TabIndex = 67;
+            lbSinUso1.Text = "(Sin Efecto)";
+            // 
+            // lbSinEfecto
+            // 
+            lbSinEfecto.AutoSize = true;
+            lbSinEfecto.ForeColor = Color.Maroon;
+            lbSinEfecto.Location = new Point(141, 306);
+            lbSinEfecto.Name = "lbSinEfecto";
+            lbSinEfecto.Size = new Size(67, 15);
+            lbSinEfecto.TabIndex = 68;
+            lbSinEfecto.Text = "(Sin Efecto)";
+            // 
             // FrmMaker
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(807, 450);
+            Controls.Add(lbSinEfecto);
+            Controls.Add(lbSinUso1);
             Controls.Add(btLimpiarPantalla);
             Controls.Add(btCargaPreset);
             Controls.Add(btBuscaAudio);
@@ -490,6 +517,7 @@
             Name = "FrmMaker";
             ShowIcon = false;
             Text = "Maker";
+            FormClosing += FrmMaker_FormClosing;
             gbRunPreset.ResumeLayout(false);
             gbRunPreset.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbAvatar).EndInit();
@@ -540,5 +568,7 @@
         private Button btBuscaAudio;
         private Button btCargaPreset;
         private Button btLimpiarPantalla;
+        private Label lbSinUso1;
+        private Label lbSinEfecto;
     }
 }
