@@ -71,6 +71,7 @@
             btLimpiarPantalla = new Button();
             lbSinUso1 = new Label();
             lbSinEfecto = new Label();
+            txTotalFotos = new TextBox();
             gbRunPreset.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbAvatar).BeginInit();
             SuspendLayout();
@@ -123,7 +124,7 @@
             // lbPhotoList
             // 
             lbPhotoList.AutoSize = true;
-            lbPhotoList.Location = new Point(665, 4);
+            lbPhotoList.Location = new Point(663, 15);
             lbPhotoList.Name = "lbPhotoList";
             lbPhotoList.Size = new Size(60, 15);
             lbPhotoList.TabIndex = 55;
@@ -135,7 +136,7 @@
             lbxPhotoList.BackColor = SystemColors.Info;
             lbxPhotoList.FormattingEnabled = true;
             lbxPhotoList.ItemHeight = 15;
-            lbxPhotoList.Location = new Point(588, 21);
+            lbxPhotoList.Location = new Point(586, 32);
             lbxPhotoList.Name = "lbxPhotoList";
             lbxPhotoList.Size = new Size(209, 409);
             lbxPhotoList.TabIndex = 54;
@@ -387,7 +388,7 @@
             btAgregaImagen.BackColor = Color.White;
             btAgregaImagen.BackgroundImage = Properties.Resources.add_24;
             btAgregaImagen.BackgroundImageLayout = ImageLayout.Zoom;
-            btAgregaImagen.Location = new Point(552, 33);
+            btAgregaImagen.Location = new Point(550, 44);
             btAgregaImagen.Name = "btAgregaImagen";
             btAgregaImagen.Size = new Size(30, 26);
             btAgregaImagen.TabIndex = 61;
@@ -399,7 +400,7 @@
             btBorraImagen.BackColor = Color.White;
             btBorraImagen.BackgroundImage = Properties.Resources.delete_24;
             btBorraImagen.BackgroundImageLayout = ImageLayout.Zoom;
-            btBorraImagen.Location = new Point(552, 395);
+            btBorraImagen.Location = new Point(550, 406);
             btBorraImagen.Name = "btBorraImagen";
             btBorraImagen.Size = new Size(30, 26);
             btBorraImagen.TabIndex = 62;
@@ -471,11 +472,22 @@
             lbSinEfecto.TabIndex = 68;
             lbSinEfecto.Text = "(Sin Efecto)";
             // 
+            // txTotalFotos
+            // 
+            txTotalFotos.BackColor = SystemColors.Info;
+            txTotalFotos.Location = new Point(747, 4);
+            txTotalFotos.Name = "txTotalFotos";
+            txTotalFotos.ReadOnly = true;
+            txTotalFotos.Size = new Size(48, 23);
+            txTotalFotos.TabIndex = 69;
+            txTotalFotos.TextAlign = HorizontalAlignment.Center;
+            // 
             // FrmMaker
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(807, 450);
+            Controls.Add(txTotalFotos);
             Controls.Add(lbSinEfecto);
             Controls.Add(lbSinUso1);
             Controls.Add(btLimpiarPantalla);
@@ -570,5 +582,6 @@
         private Button btLimpiarPantalla;
         private Label lbSinUso1;
         private Label lbSinEfecto;
+        private TextBox txTotalFotos;
     }
 }

@@ -35,6 +35,7 @@ namespace PhotoSlideMaker
                 imagenes.Add(item);
             }
             lbxPhotoList.DataSource = imagenes;
+            txTotalFotos.Text = imagenes.Count.ToString();
         }
 
         private void BtBuscaCarpeta_Click(object sender, EventArgs e)
@@ -119,6 +120,7 @@ namespace PhotoSlideMaker
                     if (!File.Exists(fileDestino))
                         File.Copy(item, fileDestino, true);
                     imagenes.Add(file);
+                    txTotalFotos.Text = imagenes.Count.ToString();
                 }
             }
         }
@@ -189,6 +191,7 @@ namespace PhotoSlideMaker
                     DialogResult result = MessageBox.Show(this.Owner, "Desea eliminar " + item + " de la lista ?", "Eliminar Item", MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
                         imagenes.RemoveAt(inx);
+                    txTotalFotos.Text = imagenes.Count.ToString();
                 }
                 else
                     MessageBox.Show(this.Owner, "Debe seleccionar el item que desea borrar. ");
