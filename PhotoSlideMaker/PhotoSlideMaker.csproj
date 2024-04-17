@@ -13,6 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="FrmDepura.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="FrmShow.cs">
       <SubType>Form</SubType>
     </Compile>

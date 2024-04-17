@@ -137,7 +137,7 @@
             ShowIcon = false;
             WindowState = FormWindowState.Maximized;
             FormClosing += FrmShow_FormClosing;
-            Load += FrmShow_Load;
+            Shown += FrmShow_Shown;
             KeyPress += FrmShow_KeyPress;
             ((System.ComponentModel.ISupportInitialize)pbCavanas).EndInit();
             ((System.ComponentModel.ISupportInitialize)tbVolumen).EndInit();

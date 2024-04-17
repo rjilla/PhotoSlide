@@ -72,6 +72,7 @@
             lbSinUso1 = new Label();
             lbSinEfecto = new Label();
             txTotalFotos = new TextBox();
+            btDepura = new Button();
             gbRunPreset.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbAvatar).BeginInit();
             SuspendLayout();
@@ -124,7 +125,7 @@
             // lbPhotoList
             // 
             lbPhotoList.AutoSize = true;
-            lbPhotoList.Location = new Point(663, 15);
+            lbPhotoList.Location = new Point(674, 8);
             lbPhotoList.Name = "lbPhotoList";
             lbPhotoList.Size = new Size(60, 15);
             lbPhotoList.TabIndex = 55;
@@ -482,11 +483,23 @@
             txTotalFotos.TabIndex = 69;
             txTotalFotos.TextAlign = HorizontalAlignment.Center;
             // 
+            // btDepura
+            // 
+            btDepura.BackColor = Color.FromArgb(255, 224, 192);
+            btDepura.Location = new Point(586, 4);
+            btDepura.Name = "btDepura";
+            btDepura.Size = new Size(75, 23);
+            btDepura.TabIndex = 70;
+            btDepura.Text = "&Depura";
+            btDepura.UseVisualStyleBackColor = false;
+            btDepura.Click += BtDepura_Click;
+            // 
             // FrmMaker
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(807, 450);
+            Controls.Add(btDepura);
             Controls.Add(txTotalFotos);
             Controls.Add(lbSinEfecto);
             Controls.Add(lbSinUso1);
@@ -529,7 +542,6 @@
             Name = "FrmMaker";
             ShowIcon = false;
             Text = "Maker";
-            FormClosing += FrmMaker_FormClosing;
             gbRunPreset.ResumeLayout(false);
             gbRunPreset.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbAvatar).EndInit();
@@ -583,5 +595,6 @@
         private Label lbSinUso1;
         private Label lbSinEfecto;
         private TextBox txTotalFotos;
+        private Button btDepura;
     }
 }

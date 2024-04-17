@@ -16,13 +16,13 @@ namespace PhotoSlideMaker
         public void CargaDatos(string carpetaEjecuta)
         {
             carpeta = carpetaEjecuta;
-            audioFile = new AudioFileReader(carpetaEjecuta + "\\" + ParseSettings.Audio);
-        }    
-        
+            if (!string.IsNullOrWhiteSpace(ParseSettings.Audio))
+                audioFile = new AudioFileReader(carpetaEjecuta + "\\" + ParseSettings.Audio);
+        }
 
-        private async void FrmShow_Load(object sender, EventArgs e)
+        public async void PlayPreset()
         {
-            if (!string.IsNullOrEmpty(ParseSettings.Audio))
+            if (!string.IsNullOrWhiteSpace(ParseSettings.Audio))
             {
                 if (outputDevice != null)
                 {
@@ -39,7 +39,7 @@ namespace PhotoSlideMaker
                 {
                     string img = carpeta + "\\" + item;
                     pbCavanas.Image = new Bitmap(img);
-                    await Task.Delay(tiempo); 
+                    await Task.Delay(tiempo);
                     if (outputDevice?.PlaybackState == PlaybackState.Stopped)
                     {
                         if (audioFile != null)
@@ -50,10 +50,11 @@ namespace PhotoSlideMaker
                     }
                 }
                 if (!ParseSettings.LoopPhotoCycle)
-                    Application.Exit();
+                    break;
                 if ((audioFile != null) && (ParseSettings.InitiateAudioEachCycle))
                     audioFile.Position = 0;
             }
+            this.Close();
         }
         private void FrmShow_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -63,7 +64,6 @@ namespace PhotoSlideMaker
                 outputDevice.Dispose();
                 outputDevice = null;
             }
-            Application.Exit();
         }
         private void FrmShow_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -110,6 +110,11 @@ namespace PhotoSlideMaker
         {
             if (outputDevice != null)
                 outputDevice.Volume = tbVolumen.Value / 100f;
+        }
+
+        private void FrmShow_Shown(object sender, EventArgs e)
+        {
+            PlayPreset();
         }
     }
 }

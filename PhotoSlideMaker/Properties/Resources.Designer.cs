@@ -83,9 +83,29 @@ namespace PhotoSlideMaker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CheckX {
+            get {
+                object obj = ResourceManager.GetObject("CheckX", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap delete_24 {
             get {
                 object obj = ResourceManager.GetObject("delete_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WRITE07A {
+            get {
+                object obj = ResourceManager.GetObject("WRITE07A", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

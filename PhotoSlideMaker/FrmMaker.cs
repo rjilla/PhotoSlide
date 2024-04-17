@@ -214,22 +214,22 @@ namespace PhotoSlideMaker
         {
             ParseSettings.InitiateAudioEachCycle = ckInitiateAudioEachCycle.Checked;
         }
-        
-        bool exitByRunPreset = false;
+
         private void BtRunPreset_Click(object sender, EventArgs e)
         {
             FrmShow preset = new();
             preset.CargaDatos(txCarpeta.Text);
             preset.ShowDialog();
-            preset.BringToFront();
-            exitByRunPreset = true;
-            //this.Close();
+            preset.Dispose();   
         }
 
-        private void FrmMaker_FormClosing(object sender, FormClosingEventArgs e)
+        private void BtDepura_Click(object sender, EventArgs e)
         {
-            if (!exitByRunPreset)
-                Application.Exit();
+            FrmDepura depura = new();
+            depura.CargaDatos(txCarpeta.Text);
+            depura.ShowDialog();
+            CargaPantalla();
         }
+       
     }
 }
