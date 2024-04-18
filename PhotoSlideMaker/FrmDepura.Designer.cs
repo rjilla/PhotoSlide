@@ -81,6 +81,7 @@
             btEliminarImagen.Text = "&Eliminar Imagen";
             btEliminarImagen.TextImageRelation = TextImageRelation.ImageAboveText;
             btEliminarImagen.UseVisualStyleBackColor = false;
+            btEliminarImagen.Click += BtEliminarImagen_Click;
             // 
             // FrmDepura
             // 
@@ -93,8 +94,6 @@
             Controls.Add(lbxAdicionales);
             Name = "FrmDepura";
             ShowIcon = false;
-            FormClosing += FrmShow_FormClosing;
-            Load += FrmShow_Load;
             ((System.ComponentModel.ISupportInitialize)pbImagen).EndInit();
             ResumeLayout(false);
         }

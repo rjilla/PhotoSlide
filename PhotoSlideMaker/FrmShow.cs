@@ -12,6 +12,7 @@ namespace PhotoSlideMaker
         WaveOutEvent? outputDevice = new();
         AudioFileReader? audioFile;
         string? carpeta;
+        bool exitPantalla = false;
 
         public void CargaDatos(string carpetaEjecuta)
         {
@@ -19,11 +20,12 @@ namespace PhotoSlideMaker
             if (!string.IsNullOrWhiteSpace(ParseSettings.Audio))
                 audioFile = new AudioFileReader(carpetaEjecuta + "\\" + ParseSettings.Audio);
         }
-
         public async void PlayPreset()
         {
             if (!string.IsNullOrWhiteSpace(ParseSettings.Audio))
             {
+                if (ParseSettings.SonidoOff)
+                    outputDevice = null;
                 if (outputDevice != null)
                 {
                     outputDevice.Init(audioFile);
@@ -33,14 +35,17 @@ namespace PhotoSlideMaker
             }
             btStopAudio.BackColor = Color.LightGreen;
             int tiempo = Convert.ToInt32(ParseSettings.TimePerPic);
+            
             while (true)
             {
                 foreach (var item in ParseSettings.PhotoList)
                 {
+                    if (exitPantalla)
+                        break;
                     string img = carpeta + "\\" + item;
                     pbCavanas.Image = new Bitmap(img);
                     await Task.Delay(tiempo);
-                    if (outputDevice?.PlaybackState == PlaybackState.Stopped)
+                    if ((outputDevice != null) && (outputDevice.PlaybackState == PlaybackState.Stopped))
                     {
                         if (audioFile != null)
                         {
@@ -49,12 +54,17 @@ namespace PhotoSlideMaker
                         }
                     }
                 }
-                if (!ParseSettings.LoopPhotoCycle)
+                if ((!ParseSettings.LoopPhotoCycle) | (exitPantalla))
                     break;
                 if ((audioFile != null) && (ParseSettings.InitiateAudioEachCycle))
                     audioFile.Position = 0;
             }
             this.Close();
+        }
+
+        private void FrmShow_Shown(object sender, EventArgs e)
+        {
+            PlayPreset();
         }
         private void FrmShow_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -65,12 +75,12 @@ namespace PhotoSlideMaker
                 outputDevice = null;
             }
         }
+
         private void FrmShow_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Escape)
                 Application.Exit();
         }
-
         private void OnButtonStopClick(object sender, EventArgs args)
         {
             if (outputDevice?.PlaybackState == PlaybackState.Paused)
@@ -88,7 +98,7 @@ namespace PhotoSlideMaker
         }
         private void ExitClick(object sender, EventArgs e)
         {
-            Application.Exit();
+            exitPantalla = true;
         }
         private void MaxClick(object sender, EventArgs e)
         {
@@ -105,16 +115,12 @@ namespace PhotoSlideMaker
         {
             this.WindowState = FormWindowState.Minimized;
         }
-
         private void TbVolumen_Scroll(object sender, EventArgs e)
         {
             if (outputDevice != null)
                 outputDevice.Volume = tbVolumen.Value / 100f;
         }
 
-        private void FrmShow_Shown(object sender, EventArgs e)
-        {
-            PlayPreset();
-        }
+        
     }
 }

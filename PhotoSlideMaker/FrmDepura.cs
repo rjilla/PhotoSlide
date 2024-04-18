@@ -41,16 +41,6 @@ namespace PhotoSlideMaker
             lbxAdicionales.DataSource = noList;
         }
 
-
-        private void FrmShow_Load(object sender, EventArgs e)
-        {
-
-        }
-        private void FrmShow_FormClosing(object sender, FormClosingEventArgs e)
-        {
-
-        }
-
         private void LbxAdicionales_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (lbxAdicionales.SelectedIndex >= 0)
@@ -87,6 +77,11 @@ namespace PhotoSlideMaker
                     MessageBox.Show(this.Owner, ex.Message);
                 }
             }
+        }
+
+        private void BtEliminarImagen_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

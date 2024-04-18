@@ -11,8 +11,9 @@ namespace PhotoSlideMaker
         }
 
         internal static bool InitiateAudioEachCycle = false;
-        internal static bool LoopPhotoCycle = false; 
-        
+        internal static bool LoopPhotoCycle = false;
+        internal static bool SonidoOff = false;
+
         internal static string ArchivoSetting = string.Empty;
         
         internal static readonly string endList = "./.";

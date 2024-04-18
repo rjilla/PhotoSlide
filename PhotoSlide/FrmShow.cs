@@ -16,6 +16,8 @@ namespace PhotoSlide
         {
             if (!string.IsNullOrEmpty(ParseSettings.Audio))
             {
+                if (ParseSettings.SonidoOff)
+                    outputDevice = null;
                 if (outputDevice != null)
                 {
                     outputDevice.Init(audioFile);
@@ -31,7 +33,7 @@ namespace PhotoSlide
                 {
                     pbCavanas.Image = new Bitmap(item);
                     await Task.Delay(tiempo); 
-                    if (outputDevice?.PlaybackState == PlaybackState.Stopped)
+                    if ((outputDevice != null) && (outputDevice.PlaybackState == PlaybackState.Stopped))
                     {
                         if (audioFile != null)
                         {

@@ -57,6 +57,7 @@
             ckInitiateAudioEachCycle = new CheckBox();
             ckLoopPhotoCycle = new CheckBox();
             gbRunPreset = new GroupBox();
+            ckSonidoOff = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)pbAvatar).BeginInit();
             gbRunPreset.SuspendLayout();
             SuspendLayout();
@@ -72,7 +73,7 @@
             // 
             // btRunPreset
             // 
-            btRunPreset.Location = new Point(183, 56);
+            btRunPreset.Location = new Point(183, 43);
             btRunPreset.Name = "btRunPreset";
             btRunPreset.Size = new Size(75, 23);
             btRunPreset.TabIndex = 1;
@@ -301,7 +302,7 @@
             // ckInitiateAudioEachCycle
             // 
             ckInitiateAudioEachCycle.AutoSize = true;
-            ckInitiateAudioEachCycle.Location = new Point(16, 30);
+            ckInitiateAudioEachCycle.Location = new Point(15, 23);
             ckInitiateAudioEachCycle.Name = "ckInitiateAudioEachCycle";
             ckInitiateAudioEachCycle.Size = new Size(157, 19);
             ckInitiateAudioEachCycle.TabIndex = 28;
@@ -312,7 +313,7 @@
             // ckLoopPhotoCycle
             // 
             ckLoopPhotoCycle.AutoSize = true;
-            ckLoopPhotoCycle.Location = new Point(16, 59);
+            ckLoopPhotoCycle.Location = new Point(15, 45);
             ckLoopPhotoCycle.Name = "ckLoopPhotoCycle";
             ckLoopPhotoCycle.Size = new Size(120, 19);
             ckLoopPhotoCycle.TabIndex = 29;
@@ -322,6 +323,7 @@
             // 
             // gbRunPreset
             // 
+            gbRunPreset.Controls.Add(ckSonidoOff);
             gbRunPreset.Controls.Add(ckInitiateAudioEachCycle);
             gbRunPreset.Controls.Add(ckLoopPhotoCycle);
             gbRunPreset.Controls.Add(btRunPreset);
@@ -332,6 +334,17 @@
             gbRunPreset.TabIndex = 30;
             gbRunPreset.TabStop = false;
             gbRunPreset.Text = "Run Preset";
+            // 
+            // ckSonidoOff
+            // 
+            ckSonidoOff.AutoSize = true;
+            ckSonidoOff.Location = new Point(15, 67);
+            ckSonidoOff.Name = "ckSonidoOff";
+            ckSonidoOff.Size = new Size(73, 19);
+            ckSonidoOff.TabIndex = 31;
+            ckSonidoOff.Text = "Soud Off";
+            ckSonidoOff.UseVisualStyleBackColor = true;
+            ckSonidoOff.CheckedChanged += CkSonidoOff_CheckedChanged;
             // 
             // FrmInicio
             // 
@@ -407,5 +420,6 @@
         private CheckBox ckInitiateAudioEachCycle;
         private CheckBox ckLoopPhotoCycle;
         private GroupBox gbRunPreset;
+        private CheckBox ckSonidoOff;
     }
 }

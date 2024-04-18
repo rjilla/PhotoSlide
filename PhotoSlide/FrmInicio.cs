@@ -6,8 +6,8 @@
         {
             InitializeComponent();
         }
-
         bool exitByRunPreset = false;
+
         private void FrmInicio_Load(object sender, EventArgs e)
         {
             txSVPFile.Text = ParseSettings.ArchivoSetting;
@@ -25,6 +25,12 @@
                 pbAvatar.Image = new Bitmap(ParseSettings.Avatar);
             lbxPhotoList.DataSource = ParseSettings.PhotoList;
         }
+        private void FrmInicio_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!exitByRunPreset)
+                Application.Exit();
+        }
+
         private void BtRunPreset_Click(object sender, EventArgs e)
         {
             FrmShow preset = new();
@@ -41,11 +47,9 @@
         {
             ParseSettings.InitiateAudioEachCycle = ckInitiateAudioEachCycle.Checked;
         }
-
-        private void FrmInicio_FormClosing(object sender, FormClosingEventArgs e)
+        private void CkSonidoOff_CheckedChanged(object sender, EventArgs e)
         {
-            if (!exitByRunPreset)
-                Application.Exit();
-        }
+            ParseSettings.SonidoOff = ckSonidoOff.Checked;
+        }        
     }
 }

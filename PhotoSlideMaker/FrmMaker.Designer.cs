@@ -73,19 +73,21 @@
             lbSinEfecto = new Label();
             txTotalFotos = new TextBox();
             btDepura = new Button();
+            ckSonidoOff = new CheckBox();
             gbRunPreset.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbAvatar).BeginInit();
             SuspendLayout();
             // 
             // gbRunPreset
             // 
+            gbRunPreset.Controls.Add(ckSonidoOff);
             gbRunPreset.Controls.Add(ckInitiateAudioEachCycle);
             gbRunPreset.Controls.Add(ckLoopPhotoCycle);
             gbRunPreset.Controls.Add(btRunPreset);
             gbRunPreset.ForeColor = Color.Blue;
             gbRunPreset.Location = new Point(24, 360);
             gbRunPreset.Name = "gbRunPreset";
-            gbRunPreset.Size = new Size(274, 81);
+            gbRunPreset.Size = new Size(274, 102);
             gbRunPreset.TabIndex = 56;
             gbRunPreset.TabStop = false;
             gbRunPreset.Text = "Run Preset";
@@ -93,7 +95,7 @@
             // ckInitiateAudioEachCycle
             // 
             ckInitiateAudioEachCycle.AutoSize = true;
-            ckInitiateAudioEachCycle.Location = new Point(15, 22);
+            ckInitiateAudioEachCycle.Location = new Point(15, 15);
             ckInitiateAudioEachCycle.Name = "ckInitiateAudioEachCycle";
             ckInitiateAudioEachCycle.Size = new Size(157, 19);
             ckInitiateAudioEachCycle.TabIndex = 28;
@@ -104,7 +106,7 @@
             // ckLoopPhotoCycle
             // 
             ckLoopPhotoCycle.AutoSize = true;
-            ckLoopPhotoCycle.Location = new Point(15, 51);
+            ckLoopPhotoCycle.Location = new Point(15, 42);
             ckLoopPhotoCycle.Name = "ckLoopPhotoCycle";
             ckLoopPhotoCycle.Size = new Size(120, 19);
             ckLoopPhotoCycle.TabIndex = 29;
@@ -114,7 +116,7 @@
             // 
             // btRunPreset
             // 
-            btRunPreset.Location = new Point(178, 33);
+            btRunPreset.Location = new Point(193, 37);
             btRunPreset.Name = "btRunPreset";
             btRunPreset.Size = new Size(75, 28);
             btRunPreset.TabIndex = 1;
@@ -139,7 +141,7 @@
             lbxPhotoList.ItemHeight = 15;
             lbxPhotoList.Location = new Point(586, 32);
             lbxPhotoList.Name = "lbxPhotoList";
-            lbxPhotoList.Size = new Size(209, 409);
+            lbxPhotoList.Size = new Size(209, 424);
             lbxPhotoList.TabIndex = 54;
             // 
             // lbAvatar
@@ -494,11 +496,22 @@
             btDepura.UseVisualStyleBackColor = false;
             btDepura.Click += BtDepura_Click;
             // 
+            // ckSonidoOff
+            // 
+            ckSonidoOff.AutoSize = true;
+            ckSonidoOff.Location = new Point(15, 69);
+            ckSonidoOff.Name = "ckSonidoOff";
+            ckSonidoOff.Size = new Size(73, 19);
+            ckSonidoOff.TabIndex = 30;
+            ckSonidoOff.Text = "Soud Off";
+            ckSonidoOff.UseVisualStyleBackColor = true;
+            ckSonidoOff.CheckedChanged += CkSonidoOff_CheckedChanged;
+            // 
             // FrmMaker
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(807, 450);
+            ClientSize = new Size(807, 474);
             Controls.Add(btDepura);
             Controls.Add(txTotalFotos);
             Controls.Add(lbSinEfecto);
@@ -596,5 +609,6 @@
         private Label lbSinEfecto;
         private TextBox txTotalFotos;
         private Button btDepura;
+        private CheckBox ckSonidoOff;
     }
 }

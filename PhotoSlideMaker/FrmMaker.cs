@@ -1,4 +1,3 @@
-using Microsoft.VisualBasic.Devices;
 using NAudio.Wave;
 using System.ComponentModel;
 
@@ -214,22 +213,31 @@ namespace PhotoSlideMaker
         {
             ParseSettings.InitiateAudioEachCycle = ckInitiateAudioEachCycle.Checked;
         }
+        private void CkSonidoOff_CheckedChanged(object sender, EventArgs e)
+        {
+            ParseSettings.SonidoOff = ckSonidoOff.Checked;
+        }
 
         private void BtRunPreset_Click(object sender, EventArgs e)
         {
             FrmShow preset = new();
             preset.CargaDatos(txCarpeta.Text);
             preset.ShowDialog();
-            preset.Dispose();   
+            preset.Dispose();
         }
 
         private void BtDepura_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txCarpeta.Text))
+            {
+                MessageBox.Show(this.Owner, "Debe elegir la carpeta del preset.");
+                return;
+            }
             FrmDepura depura = new();
             depura.CargaDatos(txCarpeta.Text);
             depura.ShowDialog();
             CargaPantalla();
         }
-       
+
     }
 }
