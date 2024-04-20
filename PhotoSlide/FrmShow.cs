@@ -32,7 +32,7 @@ namespace PhotoSlide
                 foreach (var item in ParseSettings.PhotoList)
                 {
                     pbCavanas.Image = new Bitmap(item);
-                    await Task.Delay(tiempo); 
+                    await Task.Delay(tiempo);
                     if ((outputDevice != null) && (outputDevice.PlaybackState == PlaybackState.Stopped))
                     {
                         if (audioFile != null)
@@ -103,6 +103,19 @@ namespace PhotoSlide
         {
             if (outputDevice != null)
                 outputDevice.Volume = tbVolumen.Value / 100f;
+        }
+        bool verBotones = true;
+        private void BtApagaBotones_Click(object sender, EventArgs e)
+        {
+            if (verBotones)
+                verBotones = false;
+            else
+                verBotones = true;
+            btExit.Visible = verBotones;
+            btMax.Visible = verBotones;
+            btMin.Visible = verBotones;
+            btStopAudio.Visible = verBotones;
+            tbVolumen.Visible = verBotones;
         }
     }
 }

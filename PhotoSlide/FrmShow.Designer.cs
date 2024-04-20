@@ -34,6 +34,7 @@
             btMin = new Button();
             btStopAudio = new Button();
             tbVolumen = new TrackBar();
+            btApagaBotones = new Button();
             ((System.ComponentModel.ISupportInitialize)pbCavanas).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tbVolumen).BeginInit();
             SuspendLayout();
@@ -118,12 +119,27 @@
             tbVolumen.Value = 20;
             tbVolumen.Scroll += TbVolumen_Scroll;
             // 
+            // btApagaBotones
+            // 
+            btApagaBotones.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btApagaBotones.BackColor = SystemColors.ButtonFace;
+            btApagaBotones.FlatAppearance.BorderSize = 0;
+            btApagaBotones.FlatStyle = FlatStyle.Flat;
+            btApagaBotones.Location = new Point(0, 710);
+            btApagaBotones.Name = "btApagaBotones";
+            btApagaBotones.Size = new Size(16, 14);
+            btApagaBotones.TabIndex = 5;
+            btApagaBotones.Text = "*";
+            btApagaBotones.UseVisualStyleBackColor = false;
+            btApagaBotones.Click += BtApagaBotones_Click;
+            // 
             // FrmShow
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1030, 724);
             ControlBox = false;
+            Controls.Add(btApagaBotones);
             Controls.Add(tbVolumen);
             Controls.Add(btStopAudio);
             Controls.Add(btMin);
@@ -153,5 +169,6 @@
         private Button btMin;
         private Button btStopAudio;
         private TrackBar tbVolumen;
+        private Button btApagaBotones;
     }
 }
